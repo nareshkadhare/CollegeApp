@@ -1,5 +1,7 @@
 {
   "name": "CollegeLApp",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
