@@ -1,41 +1,208 @@
-<ion-header >
-  <ion-toolbar color="mycolor" >
+<ion-header>
+  <ion-toolbar>
     <ion-title>
-      Lectures
+      Your Lectures
     </ion-title>
+    <ion-buttons slot="primary">
+      <ion-select value="MONDAY" interface="popover">
+        <ion-select-option value="MONDAY">MONDAY</ion-select-option>
+        <ion-select-option value="TUESDAY">TUESDAY</ion-select-option>
+        <ion-select-option value="WEDNESDAY">WEDNESDAY</ion-select-option>
+        <ion-select-option value="THURSDAY">THURSDAY</ion-select-option>
+        <ion-select-option value="FRIDAY">FRIDAY</ion-select-option>
+        <ion-select-option value="SATURDAY">SATURDAY</ion-select-option>
+      </ion-select>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-    <ion-card class="welcome-card" >
-      <img src="/assets/shapes.svg" alt="" />
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>
+        <ion-chip color="tertiary"> 1</ion-chip> Advance Java
+      </ion-card-title>
+
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-grid>
+        <ion-row>
+          <ion-col size="1.2">
+            <ion-icon name="person" color="tertiary"></ion-icon>
+          </ion-col>
+          <ion-col>
+            <ion-text> Kamlendu Pandey </ion-text>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="1.2">
+            <ion-icon name="alarm" color="tertiary"></ion-icon>
+          </ion-col>
+
+          <ion-col>
+            <ion-text> 11:30 To 12:30 </ion-text>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-chip color="success" >              
+            <ion-icon name="checkmark-circle-outline" color="success"></ion-icon>            
+            <ion-label>Completed</ion-label>
+          </ion-chip>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+
+
+  <ion-card>
       <ion-card-header>
-        <ion-card-subtitle>Get Started</ion-card-subtitle>
-        <ion-card-title>Welcome to Ionic</ion-card-title>
+        <ion-card-title>          
+          <ion-chip color="tertiary"> 2</ion-chip> Asp .Net
+        </ion-card-title>  
       </ion-card-header>
+  
       <ion-card-content>
-        <p>Now that your app has been created, you'll want to start building out features and components. Check out some of the resources below for next steps.</p>
+        <ion-grid>
+          <ion-row>
+            <ion-col size="1.2">
+              <ion-icon name="person" color="tertiary"></ion-icon>
+            </ion-col>
+  
+            <ion-col>
+              <ion-text> Dhaval Joshi </ion-text>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="1.2">
+              <ion-icon name="alarm" color="tertiary"></ion-icon>
+            </ion-col>
+  
+            <ion-col>
+              <ion-text> 12:30 To 01:30 </ion-text>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-chip color="tertiary" padding>                
+              <ion-icon name="bicycle" color="tertiary"></ion-icon>
+              <ion-label>Running...</ion-label>
+            </ion-chip>
+  
+          </ion-row>
+        </ion-grid>
       </ion-card-content>
     </ion-card>
-    <ion-list lines="none">
-      <ion-list-header>
-        <ion-label>Resources</ion-label>
-      </ion-list-header>
-      <ion-item href="https://ionicframework.com/docs/">
-        <ion-icon slot="start" color="medium" name="book"></ion-icon>
-        <ion-label>Ionic Documentation</ion-label>
-      </ion-item>
-      <ion-item href="https://ionicframework.com/docs/building/scaffolding">
-        <ion-icon slot="start" color="medium" name="build"></ion-icon>
-        <ion-label>Scaffold Out Your App</ion-label>
-      </ion-item>
-      <ion-item href="https://ionicframework.com/docs/layout/structure">
-        <ion-icon slot="start" color="medium" name="grid"></ion-icon>
-        <ion-label>Change Your App Layout</ion-label>
-      </ion-item>
-      <ion-item href="https://ionicframework.com/docs/theming/basics">
-        <ion-icon slot="start" color="medium" name="color-fill"></ion-icon>
-        <ion-label>Theme Your App</ion-label>
-      </ion-item>
-    </ion-list>
+    <ion-card>
+        <ion-card-header>
+          <ion-card-title>
+            <ion-chip color="tertiary"> 3 </ion-chip> Android
+          </ion-card-title>    
+        </ion-card-header>    
+        <ion-card-content>
+          <ion-grid>
+            <ion-row>
+              <ion-col size="1.2">
+                <ion-icon name="person" color="tertiary"></ion-icon>
+              </ion-col>
+    
+              <ion-col>
+                <ion-text> Shailesh Patil </ion-text>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col size="1.2">
+                <ion-icon name="alarm" color="tertiary"></ion-icon>
+              </ion-col>
+    
+              <ion-col>
+                <ion-text> 01:30 To 02:30 </ion-text>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-chip color="danger" padding>                      
+                <ion-icon name="hand" color="danger"></ion-icon>
+                <ion-label>Next Lecture</ion-label>
+              </ion-chip>
+    
+            </ion-row>
+          </ion-grid>
+        </ion-card-content>
+      </ion-card>
+      <ion-card>
+          <ion-card-header>
+            <ion-card-title>
+              <ion-chip color="tertiary"> 4 </ion-chip> PHP
+            </ion-card-title>
+      
+          </ion-card-header>
+      
+          <ion-card-content>
+            <ion-grid>
+              <ion-row>
+                <ion-col size="1.2">
+                  <ion-icon name="person" color="tertiary"></ion-icon>
+                </ion-col>
+      
+                <ion-col>
+                  <ion-text> Payal Joshi </ion-text>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col size="1.2">
+                  <ion-icon name="alarm" color="tertiary"></ion-icon>
+                </ion-col>
+      
+                <ion-col>
+                  <ion-text> 02:30 To 03:30 </ion-text>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-chip color="secondary" padding>
+                  <ion-icon name="walk" color="secondary"></ion-icon>
+                  <ion-label>Coming Soon...</ion-label>
+                </ion-chip>
+      
+              </ion-row>
+            </ion-grid>
+          </ion-card-content>
+        </ion-card>
+        <ion-card>
+            <ion-card-header>
+              <ion-card-title>
+                <ion-chip color="tertiary"> 5 </ion-chip> AWC
+              </ion-card-title>
+        
+            </ion-card-header>
+        
+            <ion-card-content>
+              <ion-grid>
+                <ion-row>
+                  <ion-col size="1.2">
+                    <ion-icon name="person" color="tertiary"></ion-icon>
+                  </ion-col>
+        
+                  <ion-col>
+                    <ion-text> Hitesh Lad </ion-text>
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col size="1.2">
+                    <ion-icon name="alarm" color="tertiary"></ion-icon>
+                  </ion-col>
+        
+                  <ion-col>
+                    <ion-text> 04:00 To 5:00 </ion-text>
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-chip color="secondary" padding>
+                    <ion-icon name="walk" color="secondary"></ion-icon>
+                    <ion-label>Coming Soon...</ion-label>
+                  </ion-chip>
+        
+                </ion-row>
+              </ion-grid>
+            </ion-card-content>
+          </ion-card>
+
 </ion-content>

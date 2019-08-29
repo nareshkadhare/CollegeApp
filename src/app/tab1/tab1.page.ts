@@ -7,6 +7,15 @@ import { Component } from '@angular/core';
 })
 export class Tab1Page {
 
-  constructor() {}
+  public weekdays: Array<string>;
+  public currentDay : string;
+  public currentDate : string;
+
+  constructor() {
+    let date = new Date();
+    this.weekdays = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+    this.currentDay = this.weekdays[date.getDay()];
+    this.currentDate = date.getDate()+"-"+date.getMonth()+"-"+date.getFullYear();
+  }
 
 }
