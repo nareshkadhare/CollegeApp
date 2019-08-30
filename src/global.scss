@@ -24,3 +24,13 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+
+$MAIN_GREDIENT : linear-gradient(-90deg,#7245d9 0,#4c5be3 52%,#2472ef 100%);
+/* SETTING HEADERS CSS */
+ion-toolbar {
+    --background: linear-gradient(-90deg,#7245d9 0,#4c5be3 52%,#2472ef 100%);
+    --color	: white;
+    --min-height : 4rem;    
+    box-shadow: 0 5px 11px 0 rgba(0,0,0,.12), 0 4px 10px 0 rgba(0,0,0,.12);
+}
