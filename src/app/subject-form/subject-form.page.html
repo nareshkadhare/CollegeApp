@@ -11,26 +11,43 @@
 
 <ion-content>
   <ion-card padding>
-      
-      <img src="assets/icon/icon.png">
-    <ion-item>
-      <ion-label color="tertiary" position="floating">Subject Name</ion-label>
-      <ion-input></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label color="tertiary" position="floating">Faculty Name</ion-label>
-      <ion-input></ion-input>
-    </ion-item>
-    <br>
-    <ion-grid>
-      <ion-row>
-        <ion-col>
-          <ion-button shape="round" expand="full">Save</ion-button>
-        </ion-col>
-        <ion-col>
-          <ion-button shape="round" expand="full">Clear</ion-button>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
+
+    <img src="assets/icon/icon.png">
+    <form [formGroup]="validations_form" (ngSubmit)="onSubmit(validations_form.value)">
+
+      <ion-item padding-top>
+        <ion-label color="tertiary" position="floating">Subject Name</ion-label>
+        <ion-input type="text" formControlName="subjectname" ></ion-input>
+      </ion-item>
+      <div class="validation-errors"> 
+        <ng-container *ngFor="let validation of validation_messages.subjectname">
+          <div class="error-message" *ngIf="validations_form.get('subjectname').hasError(validation.type) && (validations_form.get('subjectname').dirty || validations_form.get('subjectname').touched)">
+            <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+          </div>
+        </ng-container>
+      </div>
+      <ion-item>
+        <ion-label color="tertiary" position="floating">Faculty Name</ion-label>
+        <ion-input type="text" formControlName="facultyname"></ion-input>
+      </ion-item>
+      <div class="validation-errors">
+        <ng-container *ngFor="let validation of validation_messages.facultyname">
+          <div class="error-message" *ngIf="validations_form.get('facultyname').hasError(validation.type) && (validations_form.get('facultyname').dirty || validations_form.get('facultyname').touched)">
+            <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+          </div>
+        </ng-container>
+      </div>
+      <br>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-button shape="round" expand="full" type="submit">Save</ion-button>
+          </ion-col>
+          <ion-col>
+            <ion-button shape="round" expand="full"  type="reset"  >Clear</ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </form>
   </ion-card>
 </ion-content>

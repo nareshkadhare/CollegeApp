@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
+
 
 @Component({
   selector: 'app-subject-form',
@@ -7,9 +9,44 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SubjectFormPage implements OnInit {
 
-  constructor() { }
-
-  ngOnInit() {
+  public validations_form: FormGroup;
+  
+  public validation_messages = {
+    subjectname: [
+      { type: "required", message:"Subject name is required." },
+      { type: "maxlength", message:"Subject name length  cannot be more than 50 characters long." },
+      { type: 'pattern', message: 'Subject name must contain only numbers and letters.' }
+    ],
+    facultyname: [
+      { type: "required", message:"Faculty name is required." },
+      { type: "maxlength", message:"Faculty name length  cannot be more than 50 characters long." },
+      { type: 'pattern', message: 'Faculty name must contain only numbers and letters.' }
+    ]
   }
 
-}
+  constructor(public formBuilder: FormBuilder) {
+
+  }
+
+  ngOnInit() {
+    this.validations_form = this.formBuilder.group({
+      subjectname: new FormControl('', Validators.compose([
+        Validators.maxLength(50),
+        Validators.pattern('^[a-zA-Z0-9]*$'),
+        Validators.required
+      ])),
+      facultyname: new FormControl('', Validators.compose([
+        Validators.maxLength(50),
+        Validators.pattern('^[a-zA-Z0-9]*$'),
+        Validators.required
+      ]))
+    });
+  }
+
+  onSubmit(value) {
+    if(this.validations_form.valid) {
+      alert("Sucess");
+    } 
+  }
+
+} 
