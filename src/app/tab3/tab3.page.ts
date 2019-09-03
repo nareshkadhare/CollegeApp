@@ -7,6 +7,27 @@ import { Component } from '@angular/core';
 })
 export class Tab3Page {
 
-  constructor() {}
+  public monday : boolean;
+  constructor() {
+    this.monday = true;
+  }
 
+  showTable(day) {
+    
+    if(this.monday) {
+      this.monday = false
+    } else{
+      this.monday = true;
+    }
+  }
+
+  getDay(name:string) {
+    
+    // let day;
+    // switch(name) {
+    //   case "MONDAY" : 
+    //     day = ;
+    // }
+    return this.monday;
+  }
 }

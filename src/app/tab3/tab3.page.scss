@@ -1,1 +1,42 @@
+ion-toggle {
+    --background-checked:rgb(255, 255, 255);
+    --handle-background-checked	: var(--ion-color-mybg);
+    --background : white;
+    --handle-background	: var(--ion-color-mybg);
+}
 
+ion-item-divider {
+    --background:var(--ion-color-mybg);
+    
+    ion-icon {
+        color:white;
+    }
+    ion-label{
+        color:white;
+        font-size: 1rem;
+    }
+}
+ion-col {
+    font-size: 0.8rem;
+    border-right:1px dotted purple;
+    text-align: center;
+}
+
+ion-item {
+    ion-icon {
+        padding-left: 0.4rem;
+    }
+}
+
+.dayTable {
+    transition: all linear 1s;
+    opacity: 1;
+}
+
+.dayTable.ng-hide {
+    opacity: 0;
+}
+.ng-hide {
+    opacity: 0;
+    transition: none 0;
+}

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
-
+import { ToastController } from "@ionic/angular";
 
 @Component({
   selector: 'app-subject-form',
@@ -24,7 +24,7 @@ export class SubjectFormPage implements OnInit {
     ]
   }
 
-  constructor(public formBuilder: FormBuilder) {
+  constructor(public formBuilder: FormBuilder,public toastController:ToastController) {
 
   }
 
@@ -44,9 +44,20 @@ export class SubjectFormPage implements OnInit {
   }
 
   onSubmit(value) {
+    
     if(this.validations_form.valid) {
-      alert("Sucess");
+      this.presentToast("Your subject saved successfully."); 
     } 
   }
 
+  async presentToast(message) {
+    const toast = await this.toastController.create({
+      position: 'bottom',             
+      message: message,
+      color :'mybg', 
+      duration: 1500,
+      keyboardClose:true
+    });
+    toast.present();
+  }
 } 
