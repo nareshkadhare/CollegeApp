@@ -7,27 +7,42 @@ import { Component } from '@angular/core';
 })
 export class Tab3Page {
 
-  public monday : boolean;
+  public expand_collapse: boolean;
+
+  public days = [true, false, false, false, false, false];
+
   constructor() {
-    this.monday = true;
+    this.expand_collapse = false;
   }
 
-  showTable(day) {
-    
-    if(this.monday) {
-      this.monday = false
-    } else{
-      this.monday = true;
+  showTable(index) {
+
+    if (this.days[index]) {
+      this.days[index] = false
+    } else {
+      this.days[index] = true;
     }
+
+
+    let counter = 0;
+    for (let index = 0; index < this.days.length; index++) {
+      if (this.days[index]) {
+        counter++;
+      }
+    }
+
+    if (counter == 0) {
+      this.expand_collapse = false;
+    }
+    else if (counter == 6) {      
+      this.expand_collapse = true;
+    }
+
   }
 
-  getDay(name:string) {
-    
-    // let day;
-    // switch(name) {
-    //   case "MONDAY" : 
-    //     day = ;
-    // }
-    return this.monday;
+  changeExpandCollapse() {
+    for (let index = 0; index < this.days.length; index++) {
+      this.days[index] = this.expand_collapse;
+    }
   }
 }

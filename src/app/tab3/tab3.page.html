@@ -1,19 +1,23 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-      All Lecture's
+      Lecture's
     </ion-title>
     <ion-buttons slot="primary">
       <ion-button style="--ripple-color:none" color="light" style="font-size: 0.6rem">
-        <ion-label [hidden]="!monday"> Collapse All</ion-label>
-        <ion-label [hidden]="monday"> Expand All </ion-label> &nbsp; &nbsp;
-        <ion-toggle slot="end" mode="ios" [(ngModel)]="monday"></ion-toggle>
+        <ion-label [hidden]="!expand_collapse"> Collapse All</ion-label>
+        <ion-label [hidden]="expand_collapse"> Expand All </ion-label> &nbsp; &nbsp;
+        <ion-toggle slot="end" mode="ios" (ionChange)="changeExpandCollapse()" [(ngModel)]="expand_collapse">
+        </ion-toggle>
+      </ion-button>
+      <ion-button color="secondary" routerLink="/subject-form" routerDirection="forward">
+        <ion-icon name="add" size="large" color="light"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>  
+<ion-content>
   <ion-item style="--border-style : none;" color="light">
     <ion-grid>
       <ion-row>
@@ -33,14 +37,15 @@
   <ion-list>
 
     <ion-item-group>
-      <ion-item-divider (click)="showTable('MONDAY')" sticky>
+      <ion-item-divider (click)="showTable(0)" sticky>
         <ion-label>
           Monday
         </ion-label>
-        <ion-icon size="large" slot="end" name="arrow-dropdown"></ion-icon>
+        <ion-icon size="large" [hidden]="!days[0]" slot="end" name="arrow-dropdown"></ion-icon>
+        <ion-icon size="large" [hidden]="days[0]" slot="end" name="arrow-dropup"></ion-icon>
       </ion-item-divider>
 
-      <div class="dayTable" [hidden]="!monday">
+      <div class="dayTable" [hidden]="!days[0]">
         <ion-item>
           <ion-grid>
             <ion-row>
@@ -125,13 +130,14 @@
     </ion-item-group>
 
     <ion-item-group>
-      <ion-item-divider (click)="showTable('MONDAY')" sticky>
+      <ion-item-divider (click)="showTable(1)" sticky>
         <ion-label>
           Tuesday
         </ion-label>
-        <ion-icon size="large" slot="end" name="arrow-dropdown"></ion-icon>
+        <ion-icon size="large" [hidden]="!days[1]" slot="end" name="arrow-dropdown"></ion-icon>
+        <ion-icon size="large" [hidden]="days[1]" slot="end" name="arrow-dropup"></ion-icon>
       </ion-item-divider>
-      <div class="dayTable" [hidden]="!monday">
+      <div class="dayTable" [hidden]="!days[1]">
         <ion-item>
           <ion-grid>
             <ion-row>
@@ -217,13 +223,14 @@
 
 
     <ion-item-group>
-      <ion-item-divider (click)="showTable('MONDAY')" sticky>
+      <ion-item-divider (click)="showTable(2)" sticky>
         <ion-label>
           Wednesday
         </ion-label>
-        <ion-icon size="large" slot="end" name="arrow-dropdown"></ion-icon>
+        <ion-icon size="large" [hidden]="!days[2]" slot="end" name="arrow-dropdown"></ion-icon>
+        <ion-icon size="large" [hidden]="days[2]" slot="end" name="arrow-dropup"></ion-icon>
       </ion-item-divider>
-      <div class="dayTable" [hidden]="!monday">
+      <div class="dayTable" [hidden]="!days[2]">
         <ion-item>
           <ion-grid>
             <ion-row>
@@ -308,13 +315,14 @@
     </ion-item-group>
 
     <ion-item-group>
-      <ion-item-divider (click)="showTable('MONDAY')" sticky>
+      <ion-item-divider (click)="showTable(3)" sticky>
         <ion-label>
           Thursday
         </ion-label>
-        <ion-icon size="large" slot="end" name="arrow-dropdown"></ion-icon>
+        <ion-icon size="large" [hidden]="!days[3]" slot="end" name="arrow-dropdown"></ion-icon>
+        <ion-icon size="large" [hidden]="days[3]" slot="end" name="arrow-dropup"></ion-icon>
       </ion-item-divider>
-      <div class="dayTable" [hidden]="!monday">
+      <div class="dayTable" [hidden]="!days[3]">
         <ion-item>
           <ion-grid>
             <ion-row>
@@ -398,13 +406,14 @@
       </div>
     </ion-item-group>
     <ion-item-group>
-      <ion-item-divider (click)="showTable('MONDAY')" sticky>
+      <ion-item-divider (click)="showTable(4)" sticky>
         <ion-label>
           Friday
         </ion-label>
-        <ion-icon size="large" slot="end" name="arrow-dropdown"></ion-icon>
+        <ion-icon size="large" [hidden]="!days[4]" slot="end" name="arrow-dropdown"></ion-icon>
+        <ion-icon size="large" [hidden]="days[4]" slot="end" name="arrow-dropup"></ion-icon>
       </ion-item-divider>
-      <div class="dayTable" [hidden]="!monday">
+      <div class="dayTable" [hidden]="!days[4]">
         <ion-item>
           <ion-grid>
             <ion-row>
@@ -488,13 +497,14 @@
       </div>
     </ion-item-group>
     <ion-item-group>
-      <ion-item-divider (click)="showTable('MONDAY')" sticky>
+      <ion-item-divider (click)="showTable(5)" sticky>
         <ion-label>
           Saturday
         </ion-label>
-        <ion-icon size="large" slot="end" name="arrow-dropdown"></ion-icon>
+        <ion-icon size="large" [hidden]="!days[5]" slot="end" name="arrow-dropdown"></ion-icon>
+        <ion-icon size="large" [hidden]="days[5]" slot="end" name="arrow-dropup"></ion-icon>
       </ion-item-divider>
-      <div class="dayTable" [hidden]="!monday">
+      <div class="dayTable" [hidden]="!days[5]">
         <ion-item>
           <ion-grid>
             <ion-row>
