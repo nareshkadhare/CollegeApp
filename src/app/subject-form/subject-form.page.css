@@ -1,0 +1,31 @@
+ion-card {
+  -webkit-box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.12), 0 4px 10px 0 rgba(0, 0, 0, 0.12);
+          box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.12), 0 4px 10px 0 rgba(0, 0, 0, 0.12);
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+  margin-top: 1rem;
+}
+
+ion-card ion-button {
+  --background: var(--ion-color-mybg);
+  --box-shadow:0 2px 8px 0 #9774e9;
+}
+
+img {
+  height: 35vh;
+  width: auto;
+  margin: auto;
+  display: block;
+}
+
+.validation-errors {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.error-message {
+  color: #ec6464;
+  font-size: 14px;
+  margin-left: 0.6rem;
+  margin-top: 0.6rem;
+}
+/*# sourceMappingURL=subject-form.page.css.map */

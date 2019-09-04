@@ -1,1 +1,19 @@
-/* No CSS *//*# sourceMappingURL=tab2.page.css.map */
+ion-card {
+  -webkit-box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.12), 0 4px 10px 0 rgba(0, 0, 0, 0.12);
+          box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.12), 0 4px 10px 0 rgba(0, 0, 0, 0.12);
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+  margin-top: 1rem;
+}
+
+h3 {
+  color: var(--ion-color-tertiary-tint);
+}
+
+ion-icon {
+  color: var(--ion-color-tertiary-tint);
+}
+
+ion-label {
+  color: var(--ion-color-tertiary-tint);
+}
+/*# sourceMappingURL=tab2.page.css.map */

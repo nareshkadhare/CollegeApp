@@ -24,7 +24,7 @@ img {
   }
   
   .spinner > div {
-    background : #7245d9;//linear-gradient(-90deg,#7245d9 0,#4c5be3 52%,#2472ef 100%);
+    background : var(--ion-color-darkpurlpe);
     height: 100%;
     width: 0.5rem; 
     margin: 0.1rem;
@@ -86,7 +86,7 @@ img {
   h1 {
     font-size: 2rem;
     font-weight: bold;
-    color: #7245d9;
+    color:var(--ion-color-darkpurlpe); 
     font-family: monospace;
   } 
 
