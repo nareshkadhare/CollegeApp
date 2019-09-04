@@ -13,7 +13,7 @@
   <ion-card>
     <ion-card-content>
       <ion-item style="--border-style : none;">
-        <ion-label>Select Day</ion-label>
+        <ion-label>Select Day </ion-label>
         <ion-select placeholder="Select Day" interface="popover" mode="ios" value="MONDAY">
           <ion-select-option value="MONDAY">MONDAY</ion-select-option>
           <ion-select-option value="TUESDAY">TUESDAY</ion-select-option>
@@ -23,11 +23,20 @@
           <ion-select-option value="SATURDAY">SATURDAY</ion-select-option>
         </ion-select>
       </ion-item>
+      <ion-item style="--border-style : none;">
+        <ion-label>Total Lecture </ion-label>
+        <ion-input type="text" step="100" [(ngModel)]="lectureCount" inputmode="numeric" maxlength="2" value="1"
+          autofocus="true" min="1" max="100" class="ion-text-right"></ion-input>
+      </ion-item>
+      <br />
+      <ion-button (click)="createLectur()" expand="full" fill="solid" shape="round">
+        CREATE
+      </ion-button>
     </ion-card-content>
   </ion-card>
-  <ion-list>
+  <ion-list *ngIf="lectures">
     <ion-item-group>
-      <ion-item-divider sticky>
+      <ion-item-divider color="light" sticky>
         <ion-grid>
           <ion-row class="ion-text-center">
             <ion-col size="6" class="ion-text-left">
@@ -42,11 +51,12 @@
           </ion-row>
         </ion-grid>
       </ion-item-divider>
-      <ion-item>
+      <ion-item *ngFor="let item of lectures">
         <ion-grid>
           <ion-row class="ion-text-center">
             <ion-col size="6" class="ion-text-left">
-              <ion-input type="text" (click)="presentActionSheet()" readonly="true" placeholder="Select Subject"></ion-input>              
+              <ion-input type="text" (click)="presentActionSheet()" readonly="true" placeholder="Select Subject">
+              </ion-input>
             </ion-col>
             <ion-col size="3">
               <ion-datetime display-format="hh:mm A" value="1990-02-19T07:43Z" picker-format="hh:mm A">
@@ -58,32 +68,11 @@
             </ion-col>
           </ion-row>
         </ion-grid>
-
       </ion-item>
-      <ion-item>
-        <ion-grid>
-          <ion-row>
-            <ion-col size="6">
-              <ion-select placeholder="Select Day" value="Java">
-                <ion-select-option value="Java">Java</ion-select-option>
-                <ion-select-option value="NET">.NET</ion-select-option>
-                <ion-select-option value="PHP">PHP</ion-select-option>
-                <ion-select-option value="Android">Android</ion-select-option>
-                <ion-select-option value="AWS">AWS</ion-select-option>
-              </ion-select>
-            </ion-col>
-            <ion-col size="3">
-              <ion-datetime display-format="hh:mm A" value="1990-02-19T07:43Z" picker-format="hh:mm A">
-              </ion-datetime>
-            </ion-col>
-            <ion-col size="3">
-              <ion-datetime display-format="hh:mm A" value="1990-02-19T07:43Z" picker-format="hh:mm A">
-              </ion-datetime>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-
-      </ion-item>
+      <br />
+      <ion-button style="width: 85.2%;margin: 0 auto;" *ngIf="lectures" (click)="createLectur()" expand="full" fill="solid" shape="round">
+        SAVE LECTURE'S
+      </ion-button>
     </ion-item-group>
   </ion-list>
 </ion-content>
