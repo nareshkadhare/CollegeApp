@@ -10,60 +10,15 @@
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
-<ion-content>
-  <ion-card> 
+<ion-content>    
+  <ion-card *ngFor="let item of subjects"> 
     <ion-item>
       <ion-icon name="bookmarks" slot="end"></ion-icon>
-      <ion-label><b> &nbsp; Advanced JAVA </b></ion-label>
+      <ion-label><b> &nbsp; {{item.SUBJECT_NAME}} </b></ion-label>
     </ion-item>
-
     <ion-item>
       <ion-icon name="person" slot="end"></ion-icon>
-      <ion-label> &nbsp; Kamlendu Sir</ion-label>
+      <ion-label> &nbsp; {{item.FACULTY_NAME}} </ion-label>
     </ion-item>
-  </ion-card>
-  <ion-card>
-    <ion-item>
-      <ion-icon name="bookmarks" slot="end"></ion-icon>
-      <ion-label><b> &nbsp; Asp .Net </b></ion-label>
-    </ion-item>
-
-    <ion-item>
-      <ion-icon name="person" color="tertiary" slot="end"></ion-icon>
-      <ion-label> &nbsp;Dhaval Joshi </ion-label>
-    </ion-item>
-  </ion-card>
-  <ion-card>
-    <ion-item>
-      <ion-icon name="bookmarks" slot="end"></ion-icon>
-      <ion-label><b> &nbsp; PHP </b></ion-label>
-    </ion-item>
-
-    <ion-item>
-      <ion-icon name="person" slot="end"></ion-icon>
-      <ion-label> &nbsp; Payal Joshi </ion-label>
-    </ion-item>
-  </ion-card>
-  <ion-card>
-    <ion-item>
-      <ion-icon name="bookmarks" slot="end"></ion-icon>
-      <ion-label><b> &nbsp; Android </b></ion-label>
-    </ion-item>
-
-    <ion-item>
-      <ion-icon name="person" slot="end"></ion-icon>
-      <ion-label> &nbsp; Shailesh Patil </ion-label>
-    </ion-item>
-  </ion-card>
-  <ion-card>
-    <ion-item>
-      <ion-icon name="bookmarks" slot="end"></ion-icon>
-      <ion-label><b> &nbsp; AWC </b></ion-label>
-    </ion-item>
-
-    <ion-item>
-      <ion-icon name="person" slot="end"></ion-icon>
-      <ion-label> &nbsp; Hitesh Lad </ion-label>
-    </ion-item>
-  </ion-card>
+  </ion-card>    
 </ion-content>
