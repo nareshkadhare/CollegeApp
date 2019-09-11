@@ -38,8 +38,8 @@ export class DbserviceService {
   lectures = new BehaviorSubject([]);
 
   constructor(private plt: Platform, private sqlitePorter: SQLitePorter,
-    private sqlite: SQLite, private http: HttpClient,private cmnService:AppcommonService) {
-    
+    private sqlite: SQLite, private http: HttpClient, private cmnService: AppcommonService) {
+
     this.plt.ready().then(() => {
       this.sqlite.create({
         name: 'collegeapp.db',
@@ -50,8 +50,8 @@ export class DbserviceService {
           this.seedDatabase();
 
         });
-    }).finally(()=>{
-       
+    }).finally(() => {
+
     });
   }
 
@@ -65,15 +65,15 @@ export class DbserviceService {
             this.loadLectures();
             this.dbReady.next(true);
             console.log("DB IMPORTED");
-          })          
-      },error => {
+          })
+      }, error => {
         console.log(error);
-      },()=>{        
-        this.cmnService.stopLoading(); 
+      }, () => {
+        this.cmnService.stopLoading();
       });
   }
 
-  getDatabaseState(): Observable<any> {  
+  getDatabaseState(): Observable<any> {
     return this.dbReady.asObservable();
   }
 
@@ -86,7 +86,7 @@ export class DbserviceService {
   }
 
   loadSubjects() {
-    
+
     return this.database.executeSql('SELECT * FROM SUBJECT', []).then(data => {
       let subjects: C_Subject[] = [];
 
@@ -104,9 +104,20 @@ export class DbserviceService {
   }
 
 
-  async addsubject(SUBJECT_NAME, FACULTY_NAME) {
-    let data = [SUBJECT_NAME, FACULTY_NAME];
-    return await this.database.executeSql('INSERT INTO SUBJECT (SUBJECT_NAME, FACULTY_NAME) VALUES (?, ?)', data).then( data => {      
+  async addsubject(form_data, record) {
+
+    let data = [];
+
+    let query = "INSERT INTO SUBJECT (SUBJECT_NAME, FACULTY_NAME) VALUES ";
+    for (let index = 0; index < record; index++) {
+      query += "(?, ?)";
+      if (index != record-1) {
+        query += ","
+      }
+      data.push(form_data.get("subjectname"+index).value.trim());
+      data.push(form_data.get("facultyname"+index).value.trim());
+    }    
+    return await this.database.executeSql(query, data).then(data => {
       this.loadSubjects();
     });
   }

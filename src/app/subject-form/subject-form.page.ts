@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
-import { ToastController } from "@ionic/angular";
 import { DbserviceService } from '../services/dbservice.service';
 import { AppcommonService } from "../services/appcommon.service";
 
@@ -11,9 +10,13 @@ import { AppcommonService } from "../services/appcommon.service";
 })
 export class SubjectFormPage implements OnInit {
 
+  @ViewChild("noOfSubjectInput", { static: true }) noOfSubjectInput;  
+
   public validations_form: FormGroup;
 
   submitted = false;
+  lectureCount: number = 1;
+  public lectures: Array<number>;
 
 
   public validation_messages = {
@@ -27,23 +30,13 @@ export class SubjectFormPage implements OnInit {
     ]
   }
 
-  constructor(public formBuilder: FormBuilder, public toastController: ToastController,
+  constructor(public formBuilder: FormBuilder,
     private dbservice: DbserviceService, private cmnService: AppcommonService) {
 
   }
 
   ngOnInit() {
-    this.validations_form = this.formBuilder.group({
-      subjectname: new FormControl('', Validators.compose([
-        Validators.maxLength(50),
 
-        Validators.required
-      ])),
-      facultyname: new FormControl('', Validators.compose([
-        Validators.maxLength(50),
-        Validators.required
-      ]))
-    });
   }
 
   onSubmit() {
@@ -61,17 +54,19 @@ export class SubjectFormPage implements OnInit {
     if (this.validations_form.valid) {
 
       this.cmnService.presentLoading("Request Processing...");
-      
-      this.dbservice.addsubject(this.getFormValue("subjectname"), this.getFormValue("facultyname")).
-        then( data => {          
-          this.cmnService.presentToast("Your subject saved successfully.");                    
+      this.dbservice.addsubject(this.validations_form,this.lectureCount).
+        then(data => {          
+          this.cmnService.presentToast("Your subjects saved successfully.");
           this.onReset();
-        }).catch(e => {          
+        }).catch(e => {
           err = e;
-        }).finally(() => {                               
-           this.cmnService.stopLoading().finally(() => {            
+        }).finally(() => {
+          this.lectureCount=1;          
+          this.lectures = [];
+          this.submitted = false;
+          this.cmnService.stopLoading().finally(() => {
             if (err) {
-              this.cmnService.presentToast("There is some technical problem.");
+              this.cmnService.presentToast('<ion-icon name="information-circle-outline"></ion-icon> There is some technical problem.',"danger");
             }
           });
 
@@ -89,9 +84,53 @@ export class SubjectFormPage implements OnInit {
     return this.validations_form.get(name).value.trim();
   }
 
-  checkValue(name) {
-    if (this.validations_form.get(name) !== null && this.validations_form.get(name).value.trim() === "") {
-      this.validations_form.get(name).setValue("");
+  checkValue(name,i) {
+    
+    if (this.validations_form.get(name+i) !== null && this.validations_form.get(name+i).value!==null && this.validations_form.get(name+i).value.trim() === "") {
+      this.validations_form.get(name+i).setValue("");
     }
+    return;
+  }
+
+  ionViewDidEnter() {
+    this.noOfSubjectInput.setFocus();
+  }
+
+  createSubject() {
+    let err;
+    if (isNaN(this.lectureCount)) {
+      err = 'Please provide valid input number.';
+    }
+    else if (this.lectureCount < 1) {
+      err = 'Number of subjects must be greter than zero(0).';
+    } else {
+      this.lectures = new Array(Number(this.lectureCount));
+      this.makeElements();
+      return;
+    }
+
+    if (err) {
+      this.cmnService.presentToast('<ion-icon name="information-circle-outline"></ion-icon> ' + err, "danger");
+      this.noOfSubjectInput.setFocus();
+    }
+  }
+
+
+  makeElements() {
+    
+    let formInputs:Object=new Object();
+    for (let index = 0; index < this.lectures.length; index++) {
+
+      formInputs["subjectname"+index] = new FormControl('', Validators.compose([
+        Validators.maxLength(50),
+        Validators.required
+      ]));
+
+      formInputs["facultyname"+index] = new FormControl('', Validators.compose([
+        Validators.maxLength(50),
+        Validators.required
+      ]));             
+    }    
+    this.validations_form = this.formBuilder.group(formInputs);    
   }
 } 
