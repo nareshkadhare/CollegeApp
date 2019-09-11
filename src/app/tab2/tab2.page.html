@@ -10,15 +10,28 @@
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
-<ion-content>    
-  <ion-card *ngFor="let item of subjects"> 
+<ion-content>  
+  <img src="assets/no-record-found.png"  alt="">
+  <!-- <ion-card>
     <ion-item>
-      <ion-icon name="bookmarks" slot="end"></ion-icon>
-      <ion-label><b> &nbsp; {{item.SUBJECT_NAME}} </b></ion-label>
+      <ion-icon mode="ios" name="journal"></ion-icon>
+      <ion-icon style="transform: rotate(90deg);" name="git-network"></ion-icon>
+      <ion-label>
+        <strong>ABC</strong>
+        <p>Hitesh Lad</p>
+      </ion-label>
+      <ion-icon name="more" (click)="presentActionSheet(1)" size="large" slot="end"></ion-icon>
     </ion-item>
+  </ion-card>   -->
+  <ion-card *ngFor="let item of subjects">
     <ion-item>
-      <ion-icon name="person" slot="end"></ion-icon>
-      <ion-label> &nbsp; {{item.FACULTY_NAME}} </ion-label>
+      <ion-icon mode="ios" name="journal"></ion-icon>
+      <ion-icon style="transform: rotate(90deg);" name="git-network"></ion-icon>
+      <ion-label>
+        <strong>{{item.SUBJECT_NAME}}</strong>
+        <p>{{item.FACULTY_NAME}}</p>
+      </ion-label>
+      <ion-icon name="more" (click)="presentActionSheet(item.SUBJECT_ID)" size="large" slot="end"></ion-icon>
     </ion-item>
-  </ion-card>    
+  </ion-card>
 </ion-content>

@@ -1,7 +1,25 @@
 ion-card {    
     box-shadow: 0 5px 08px 0 rgba(0,0,0,.12), 0 4px 10px 0 rgba(0,0,0,.12);
     border-top : 1px solid rgba(0,0,0,.06);    
-    margin-top: 1rem ;    
+    margin-top: 1rem ;
+    
+    ion-item {
+        --border-style: none;                
+    }
+    ion-icon {
+        font-size: 2.4rem;
+    }
+    ion-label {
+
+        padding: 0.4rem;
+        padding-top: 1rem;
+        strong {
+            font-size: 1.0rem;
+        }
+        p {
+            margin: 0.5rem 0rem;            
+        }
+    }
 }
 h3 {
     color:var(--ion-color-tertiary-tint);    
@@ -12,3 +30,24 @@ ion-icon {
 ion-label {
     color:var(--ion-color-tertiary-tint);     
 }
+
+ion-action-sheet {
+    --color:var(--ion-color-tertiary-tint);     
+}
+
+/*
+ion-fab-button {
+    --background: var(--ion-color-mybg);
+    --background-activated: var(--ion-color-mybg);
+    --background-focused: var(--ion-color-mybg);
+    --background-hover: var(--ion-color-mybg);       
+    --color: #ffffff;
+    --color-activated: #ffffff;
+    --color-focused :#ffffff;
+    --color-hover:#ffffff;  
+    height: 4rem;
+    width: 4rem;  
+    ion-icon {
+        color: #ffffff;
+    }
+}*/

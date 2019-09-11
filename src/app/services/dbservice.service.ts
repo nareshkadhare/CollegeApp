@@ -11,7 +11,7 @@ import { error } from 'util';
 
 
 export interface C_Subject {
-  ID: number,
+  SUBJECT_ID: number,
   SUBJECT_NAME: string,
   FACULTY_NAME: string
 }
@@ -93,7 +93,7 @@ export class DbserviceService {
       if (data.rows.length > 0) {
         for (var i = 0; i < data.rows.length; i++) {
           subjects.push({
-            ID: data.rows.item(i).SUBJECT_ID,
+            SUBJECT_ID: data.rows.item(i).SUBJECT_ID,
             SUBJECT_NAME: data.rows.item(i).SUBJECT_NAME,
             FACULTY_NAME: data.rows.item(i).FACULTY_NAME,
           });
@@ -111,13 +111,21 @@ export class DbserviceService {
     let query = "INSERT INTO SUBJECT (SUBJECT_NAME, FACULTY_NAME) VALUES ";
     for (let index = 0; index < record; index++) {
       query += "(?, ?)";
-      if (index != record-1) {
+      if (index != record - 1) {
         query += ","
       }
-      data.push(form_data.get("subjectname"+index).value.trim());
-      data.push(form_data.get("facultyname"+index).value.trim());
-    }    
+      data.push(form_data.get("subjectname" + index).value.trim());
+      data.push(form_data.get("facultyname" + index).value.trim());
+    }
     return await this.database.executeSql(query, data).then(data => {
+      this.loadSubjects();
+    });
+  }
+
+
+  async deleteSubject(subject_id) {    
+    let data = [subject_id];
+    return await this.database.executeSql("DELETE FROM SUBJECT WHERE SUBJECT_ID = ?", data).then(data => {
       this.loadSubjects();
     });
   }

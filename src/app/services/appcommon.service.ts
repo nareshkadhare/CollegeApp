@@ -31,6 +31,7 @@ export class AppcommonService {
       position: 'bottom',
       message: message,
       color: color,
+      cssClass:"info",
       duration: 1500,
       keyboardClose: true
     });
