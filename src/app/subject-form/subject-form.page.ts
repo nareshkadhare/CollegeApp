@@ -1,7 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
-import { DbserviceService } from '../services/dbservice.service';
+import { DbserviceService, C_Subject } from '../services/dbservice.service';
 import { AppcommonService } from "../services/appcommon.service";
+import { ActivatedRoute,Router } from '@angular/router';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-subject-form',
@@ -10,10 +12,13 @@ import { AppcommonService } from "../services/appcommon.service";
 })
 export class SubjectFormPage implements OnInit {
 
-  @ViewChild("noOfSubjectInput", { static: true }) noOfSubjectInput;  
+  @ViewChild("noOfSubjectInput", { static: true }) noOfSubjectInput;
 
   public validations_form: FormGroup;
 
+  public singleSubject: C_Subject;
+
+  public subject_id = null;
   submitted = false;
   lectureCount: number = 1;
   public lectures: Array<number>;
@@ -31,47 +36,82 @@ export class SubjectFormPage implements OnInit {
   }
 
   constructor(public formBuilder: FormBuilder,
-    private dbservice: DbserviceService, private cmnService: AppcommonService) {
+    private dbservice: DbserviceService, 
+    private cmnService: AppcommonService, 
+    private activatedRoute: ActivatedRoute,
+    private router:Router,
+    private location: Location) {
 
   }
 
   ngOnInit() {
-
+    this.subject_id = this.activatedRoute.snapshot.paramMap.get('subject_id');
+    if (this.subject_id != null) {
+      this.lectures = new Array(Number(1));
+      this.makeElements();
+    }
   }
+
+
 
   onSubmit() {
 
     this.submitted = true;
-
-    // stop here if form is invalid
     if (this.validations_form.invalid) {
       return;
     }
-
-
     let err;
 
     if (this.validations_form.valid) {
 
       this.cmnService.presentLoading("Request Processing...");
-      this.dbservice.addsubject(this.validations_form,this.lectureCount).
-        then(data => {          
-          this.cmnService.presentToast("Your subjects saved successfully.");
-          this.onReset();
+
+      if (this.subject_id != null) {
+
+        
+        this.dbservice.updateSubject(this.validations_form.get("subjectname0").value,this.validations_form.get("facultyname0").value,this.subject_id)
+        .then(data=>{
+
+          this.cmnService.presentToast("Your subjects updated successfully.");
+
+          setTimeout(() => {
+            this.location.back();  
+          }, 500);
+          
+
         }).catch(e => {
           err = e;
-        }).finally(() => {
-          this.lectureCount=1;          
-          this.lectures = [];
-          this.submitted = false;
+        }).finally(() => {          
           this.cmnService.stopLoading().finally(() => {
             if (err) {
-              this.cmnService.presentToast('<ion-icon name="information-circle-outline"></ion-icon> There is some technical problem.',"danger");
+              this.cmnService.presentToast('<ion-icon name="information-circle-outline"></ion-icon> There is some technical problem.', "danger");
             }
           });
 
         });
 
+      } else {
+
+        this.dbservice.addsubject(this.validations_form, this.lectureCount).
+          then(data => {
+            this.cmnService.presentToast("Your subjects saved successfully.");
+            setTimeout(() => {
+              this.location.back();  
+            }, 500);
+          }).catch(e => {
+            err = e;
+          }).finally(() => {
+            this.lectureCount = 1;
+            this.lectures = [];
+            this.submitted = false;
+            this.cmnService.stopLoading().finally(() => {
+              if (err) {
+                this.cmnService.presentToast('<ion-icon name="information-circle-outline"></ion-icon> There is some technical problem.', "danger");
+              }
+            });
+
+          });
+      }
     }
   }
 
@@ -84,16 +124,22 @@ export class SubjectFormPage implements OnInit {
     return this.validations_form.get(name).value.trim();
   }
 
-  checkValue(name,i) {
-    
-    if (this.validations_form.get(name+i) !== null && this.validations_form.get(name+i).value!==null && this.validations_form.get(name+i).value.trim() === "") {
-      this.validations_form.get(name+i).setValue("");
+  checkValue(name, i) {
+
+    if (this.validations_form.get(name + i) !== null && this.validations_form.get(name + i).value !== null && this.validations_form.get(name + i).value.trim() === "") {
+      this.validations_form.get(name + i).setValue("");
     }
     return;
   }
 
   ionViewDidEnter() {
-    this.noOfSubjectInput.setFocus();
+    if (this.subject_id == null) {
+      this.noOfSubjectInput.setFocus();
+    } else {
+      this.singleSubject = this.dbservice.getSingleSubject();      
+      this.validations_form.get("subjectname0").setValue(this.singleSubject.SUBJECT_NAME);
+      this.validations_form.get("facultyname0").setValue(this.singleSubject.FACULTY_NAME);      
+    }
   }
 
   createSubject() {
@@ -117,20 +163,20 @@ export class SubjectFormPage implements OnInit {
 
 
   makeElements() {
-    
-    let formInputs:Object=new Object();
+
+    let formInputs: Object = new Object();
     for (let index = 0; index < this.lectures.length; index++) {
 
-      formInputs["subjectname"+index] = new FormControl('', Validators.compose([
+      formInputs["subjectname" + index] = new FormControl('', Validators.compose([
         Validators.maxLength(50),
         Validators.required
       ]));
 
-      formInputs["facultyname"+index] = new FormControl('', Validators.compose([
+      formInputs["facultyname" + index] = new FormControl('', Validators.compose([
         Validators.maxLength(50),
         Validators.required
-      ]));             
-    }    
-    this.validations_form = this.formBuilder.group(formInputs);    
+      ]));
+    }
+    this.validations_form = this.formBuilder.group(formInputs);
   }
 } 

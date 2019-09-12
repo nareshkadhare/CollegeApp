@@ -26,9 +26,9 @@ export class AppcommonService {
     }, 100)
   }
 
-  async presentToast(message,color='mybg') {
+  async presentToast(message,color='dark') {
     const toast = await this.toastController.create({
-      position: 'bottom',
+      position: 'top',
       message: message,
       color: color,
       cssClass:"info",

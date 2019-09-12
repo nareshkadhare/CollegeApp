@@ -3,7 +3,7 @@ import { SQLiteObject, SQLite } from '@ionic-native/sqlite/ngx';
 import { Platform } from '@ionic/angular';
 import { HttpClient } from '@angular/common/http';
 import { SQLitePorter } from '@ionic-native/sqlite-porter/ngx';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { async } from 'q';
 
 import { AppcommonService } from "./appcommon.service";
@@ -36,6 +36,8 @@ export class DbserviceService {
 
   subjects = new BehaviorSubject([]);
   lectures = new BehaviorSubject([]);
+
+  private singleSubject: C_Subject;
 
   constructor(private plt: Platform, private sqlitePorter: SQLitePorter,
     private sqlite: SQLite, private http: HttpClient, private cmnService: AppcommonService) {
@@ -85,9 +87,32 @@ export class DbserviceService {
     return this.lectures.asObservable();
   }
 
+  getSingleSubject(): C_Subject {
+    return this.singleSubject;
+  }
+
+  loadSingleSubject(SUBJECT_ID) {
+    let data = [SUBJECT_ID];
+    return this.database.executeSql(" SELECT * FROM SUBJECT WHERE SUBJECT_ID = ? ", data).then(data => {
+
+      let subjects: C_Subject[] = [];
+
+      if (data.rows.length > 0) {
+        for (var i = 0; i < data.rows.length; i++) {
+          subjects.push({
+            SUBJECT_ID: data.rows.item(i).SUBJECT_ID,
+            SUBJECT_NAME: data.rows.item(i).SUBJECT_NAME,
+            FACULTY_NAME: data.rows.item(i).FACULTY_NAME,
+          });
+        }
+      }
+      this.singleSubject = subjects[0];
+    });
+  }
+
   loadSubjects() {
 
-    return this.database.executeSql('SELECT * FROM SUBJECT', []).then(data => {
+    return this.database.executeSql('SELECT * FROM SUBJECT ORDER BY SUBJECT_ID DESC', []).then(data => {
       let subjects: C_Subject[] = [];
 
       if (data.rows.length > 0) {
@@ -123,9 +148,17 @@ export class DbserviceService {
   }
 
 
-  async deleteSubject(subject_id) {    
+  async deleteSubject(subject_id) {
     let data = [subject_id];
     return await this.database.executeSql("DELETE FROM SUBJECT WHERE SUBJECT_ID = ?", data).then(data => {
+      this.loadSubjects();
+    });
+  }
+
+
+  async updateSubject(subjectname, facultyname, subject_id) {
+    let data = [subjectname, facultyname, subject_id];
+    return await this.database.executeSql("UPDATE SUBJECT SET SUBJECT_NAME= ? , FACULTY_NAME=? WHERE SUBJECT_ID = ?", data).then(data => {
       this.loadSubjects();
     });
   }

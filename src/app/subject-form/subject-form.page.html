@@ -3,15 +3,14 @@
     <ion-title>Save Subject</ion-title>
     <ion-buttons slot="start">
       <ion-button color="secondary" routerLink="/tabs/tab2" routerDirection="back">
-        <ion-icon name="arrow-round-back"  size="large" color="light"></ion-icon>
+        <ion-icon name="arrow-round-back" size="large" color="light"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  
-  <ion-card>
+  <ion-card [hidden]="!(subject_id==null)">
     <ion-card-content>
       <ion-item>
         <ion-label>Number of subject </ion-label>
@@ -25,7 +24,6 @@
     </ion-card-content>
   </ion-card>
 
-
   <ion-list *ngIf="lectures && lectures.length > 0">
 
     <form [formGroup]="validations_form" (ngSubmit)="onSubmit()">
@@ -35,24 +33,26 @@
         <ion-item>
           <ion-icon name="bookmarks" color="tertiary" slot="end"></ion-icon>
           <ion-label color="tertiary" position="floating">
-              <ion-text color="danger">*</ion-text> Enter subject name
+            <ion-text color="danger">*</ion-text> Enter subject name
           </ion-label>
-          <ion-input type="text" (ionBlur)="checkValue('subjectname',i)" formControlName="{{'subjectname'+i}}"></ion-input>
+          <ion-input type="text" (ionBlur)="checkValue('subjectname',i)" formControlName="{{'subjectname'+i}}">
+          </ion-input>
         </ion-item>
         <div class="validation-errors">
           <ng-container *ngFor="let validation of validation_messages.subjectname">
             <div class="error-message"
               *ngIf="submitted && validations_form.get('subjectname'+i).hasError(validation.type) ">
-              <ion-icon  name="information-circle-outline"></ion-icon> {{ validation.message }}
+              <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
             </div>
           </ng-container>
         </div>
         <ion-item>
           <ion-icon name="person" color="tertiary" slot="end"></ion-icon>
           <ion-label color="tertiary" position="floating">
-              <ion-text color="danger">*</ion-text> Enter faculty name
+            <ion-text color="danger">*</ion-text> Enter faculty name
           </ion-label>
-          <ion-input type="text" (ionBlur)="checkValue('facultyname',i)" formControlName="{{'facultyname'+i}}"></ion-input>
+          <ion-input type="text" (ionBlur)="checkValue('facultyname',i)" formControlName="{{'facultyname'+i}}">
+          </ion-input>
         </ion-item>
         <div class="validation-errors">
           <ng-container *ngFor="let validation of validation_messages.facultyname">

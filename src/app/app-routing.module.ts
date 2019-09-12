@@ -7,6 +7,7 @@ const routes: Routes = [
     loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
   },
   { path: 'subject-form', loadChildren: './subject-form/subject-form.module#SubjectFormPageModule' },
+  { path: 'subject-form/:subject_id', loadChildren: './subject-form/subject-form.module#SubjectFormPageModule' },
   { path: 'lectureform', loadChildren: './tab3/lectureform/lectureform.module#LectureformPageModule' },   { path: 'tab5', loadChildren: './tab5/tab5.module#Tab5PageModule' },
  
 ];

@@ -3,6 +3,8 @@ import { AppcommonService } from "../services/appcommon.service";
 import { ActionSheetController } from '@ionic/angular';
 import { DbserviceService, C_Subject } from "../services/dbservice.service";
 
+import { Router } from "@angular/router";
+
 @Component({
   selector: 'app-tab2',
   templateUrl: 'tab2.page.html',
@@ -15,7 +17,8 @@ export class Tab2Page implements OnInit {
 
   constructor(public db: DbserviceService,
     public commonService: AppcommonService,
-    public actionSheetController: ActionSheetController) {      
+    public actionSheetController: ActionSheetController,
+    private router: Router) {
   }
 
   ionViewDidEnter() {
@@ -37,7 +40,7 @@ export class Tab2Page implements OnInit {
   }
 
   async presentActionSheet(subject_id) {
-    
+
     const actionSheet = await this.actionSheetController.create({
       header: 'ACTIONS',
       cssClass: 'myActionSheet',
@@ -49,28 +52,35 @@ export class Tab2Page implements OnInit {
         handler: () => {
 
           this.commonService.presentLoading("Requrest processing...");
-          this.db.deleteSubject(subject_id).then( data => {
+          this.db.deleteSubject(subject_id).then(data => {
             this.commonService.presentToast('<ion-icon name="information-circle-outline"></ion-icon> Subject removed successfully.');
           }).
-          catch( e => {
-            this.commonService.presentToast('<ion-icon name="information-circle-outline"></ion-icon> There is some technical problem',"danger");
-          })
-          .finally(() => {
-            this.commonService.stopLoading();
-          })
+            catch(e => {
+              this.commonService.presentToast('<ion-icon name="information-circle-outline"></ion-icon> There is some technical problem', "danger");
+            })
+            .finally(() => {
+              this.commonService.stopLoading();
+            })
         }
       }, {
         text: 'Edit',
         icon: 'create',
         handler: () => {
-          console.log('Share clicked');
+          actionSheet.dismiss();
+          this.db.getDatabaseState().subscribe(ready => {
+            if (ready) {
+              this.db.loadSingleSubject(subject_id).then(data => {
+                this.router.navigateByUrl("/subject-form/" + subject_id);
+              });
+            }
+          });
         }
       }, {
         text: 'Cancel',
         icon: 'close',
-        role: 'cancel',
+        role: 'destructive',
         handler: () => {
-          console.log('Cancel clicked');
+          console.log("destructive")
         }
       }]
     });

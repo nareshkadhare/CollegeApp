@@ -13,12 +13,11 @@
 <ion-content>  
   <div class="noRecord" *ngIf="(subjects && subjects.length < 1)">
       <img src="assets/no-record-found.png" alt="">
-  </div>
-  
+  </div>  
   <!-- <ion-card>
     <ion-item>
       <ion-icon mode="ios" name="journal"></ion-icon>
-      <ion-icon style="transform: rotate(90deg);" name="git-network"></ion-icon>
+      <ion-icon style="transform: rotate(90deg);" mode="ios" name="git-network"></ion-icon>
       <ion-label>
         <strong>ABC</strong>
         <p>Hitesh Lad</p>
@@ -26,6 +25,7 @@
       <ion-icon name="more" (click)="presentActionSheet(1)" size="large" slot="end"></ion-icon>
     </ion-item>
   </ion-card>   -->
+  
   <ion-card *ngFor="let item of subjects">
     <ion-item>
       <ion-icon mode="ios" name="journal"></ion-icon>
