@@ -12,11 +12,10 @@ export class Tab2Page implements OnInit {
 
   subjects: C_Subject[] = [];
 
+
   constructor(public db: DbserviceService,
     public commonService: AppcommonService,
-    public actionSheetController: ActionSheetController) {
-
-
+    public actionSheetController: ActionSheetController) {      
   }
 
   ionViewDidEnter() {

@@ -1,3 +1,15 @@
+.noRecord {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 2% auto;
+    height: 90%;
+    img {
+        padding: 0rem 2rem;
+    }
+}
+
+
 ion-card {    
     box-shadow: 0 5px 08px 0 rgba(0,0,0,.12), 0 4px 10px 0 rgba(0,0,0,.12);
     border-top : 1px solid rgba(0,0,0,.06);    

@@ -1,0 +1,16 @@
+ion-button {
+    --background: var(--ion-color-mybg);
+    --box-shadow:0 2px 8px 0 #9774e9;    
+}
+.imgDiv {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 2% auto;    
+    img {
+        padding: 0rem 2rem;
+    }
+}
+ion-icon {
+    font-size: 1.6rem;
+}

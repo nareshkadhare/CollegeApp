@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-      Subjects
+      Subject's
     </ion-title>
     <ion-buttons slot="primary">
       <ion-button color="secondary" routerLink="/subject-form" routerDirection="forward">
@@ -11,7 +11,10 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>  
-  <img src="assets/no-record-found.png"  alt="">
+  <div class="noRecord" *ngIf="(subjects && subjects.length < 1)">
+      <img src="assets/no-record-found.png" alt="">
+  </div>
+  
   <!-- <ion-card>
     <ion-item>
       <ion-icon mode="ios" name="journal"></ion-icon>

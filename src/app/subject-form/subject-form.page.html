@@ -35,7 +35,7 @@
         <ion-item>
           <ion-icon name="bookmarks" color="tertiary" slot="end"></ion-icon>
           <ion-label color="tertiary" position="floating">
-            Enter subject name
+              <ion-text color="danger">*</ion-text> Enter subject name
           </ion-label>
           <ion-input type="text" (ionBlur)="checkValue('subjectname',i)" formControlName="{{'subjectname'+i}}"></ion-input>
         </ion-item>
@@ -50,7 +50,7 @@
         <ion-item>
           <ion-icon name="person" color="tertiary" slot="end"></ion-icon>
           <ion-label color="tertiary" position="floating">
-            Enter faculty name
+              <ion-text color="danger">*</ion-text> Enter faculty name
           </ion-label>
           <ion-input type="text" (ionBlur)="checkValue('facultyname',i)" formControlName="{{'facultyname'+i}}"></ion-input>
         </ion-item>
